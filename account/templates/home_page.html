@@ -10,3 +10,10 @@
 {% block body %}
 Hello {{user.username}}
 {% endblock %}
+
+{% block custom_script %}
+<script>
+    document.getElementById('create_post_page_nav').setAttribute('class', 'nav-item');
+    document.getElementById('home_page_nav').setAttribute('class', 'nav-item active');
+</script>
+{% endblock %}

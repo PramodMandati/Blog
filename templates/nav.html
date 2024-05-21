@@ -6,11 +6,11 @@
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'account:home_page' %}">Home <span class="sr-only">(current)</span></a>
+      <li id="home_page_nav" class="nav-item active">
+        <a class="nav-link" href="{% url 'post:home_page' %}">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Create Post</a>
+      <li id="create_post_page_nav" class="nav-item">
+        <a class="nav-link" href="{% url 'post:post_create' %}">Create Post</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'account:logout' %}">Logout</a>

@@ -11,11 +11,11 @@ from .forms import UserCreationForm
 class LoginView(FormView):
     template_name = 'login.html'
     form_class = AuthenticationForm
-    success_url = reverse_lazy('account:home_page')
+    success_url = reverse_lazy('post:home_page')
 
     def get(self, request, *args, **kwargs):
         if request.user and request.user.is_authenticated:
-            return redirect(reverse('account:home_page'))
+            return redirect(reverse('post:home_page'))
         return super().get(request, *args, **kwargs)
 
     def form_valid(self, form):

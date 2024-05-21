@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Create Post Page{% endblock %}
+
+{% block navigation %}
+{% include 'nav.html' %}
+{% endblock %}
+
+{% block body %}
+<form method="post">
+    {% csrf_token %}
+    {{form|crispy}}
+    <button type="submit" class="btn btn-primary">Create Post</button>
+</form>
+{% endblock %}
+
+{% block custom_script %}
+<script>
+    document.getElementById('create_post_page_nav').setAttribute('class', 'nav-item active');
+    document.getElementById('home_page_nav').setAttribute('class', 'nav-item');
+</script>
+{% endblock %}
