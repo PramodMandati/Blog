@@ -3,7 +3,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import reverse
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, UpdateView
 
 from .forms import PostCreateForm
 from .models import Post
@@ -29,3 +29,15 @@ class PostListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Post.objects.filter(user=self.request.user).all()
+
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = 'post.html'
+    slug_field = 'id'
+    form_class = PostCreateForm
+
+    def get_success_url(self):
+        return reverse('post:post_update', kwargs={'id': self.object.id})
+
+    def get_object(self, queryset=None):
+        return Post.objects.filter(user=self.request.user, id=self.kwargs['id']).first()
