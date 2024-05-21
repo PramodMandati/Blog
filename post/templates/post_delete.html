@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Post Page{% endblock %}
+
+{% block navigation %}
+{% include 'nav.html' %}
+{% endblock %}
+
+{% block body %}
+<form method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+    {{ form }}
+    <input class="btn btn-danger" type="submit" value="Confirm">
+</form>
+<a class="btn btn-primary" href="{% url 'post:home_page' %}">No</a>
+{% endblock %}

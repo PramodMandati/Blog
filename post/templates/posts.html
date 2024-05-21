@@ -20,7 +20,8 @@
                     Published at: {% if not post.is_draft %}{{post.published_at}}{% endif %}
                 </p>
             </blockquote>
-            <a href="#" class="btn btn-primary">Detail</a>
+            <a href="{% url 'post:post_update' id=post.id %}" class="btn btn-primary">Update</a>
+            <a href="{% url 'post:post_delete' id=post.id %}" class="btn btn-danger">Delete</a>
         </div>
     </div>
 {% endfor %}
