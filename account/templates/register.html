@@ -1,0 +1,13 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <form method="post">
+            {% csrf_token %}
+            {{form}}
+            <button type="submit">Create Account</button>
+        </form>
+        <a href="{% url 'account:login_page' %}">Back to login</a>
+    </body>
+</html>
