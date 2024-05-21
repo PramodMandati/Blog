@@ -1,9 +1,9 @@
-<html>
-    <head>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
-    </head>
-    <body>
-        Hello {{user.username}}
-        <a href="{% url 'account:logout' %}">Logout</a>
-    </body>
-</html>
+{% block title %}Home Page{% endblock %}
+
+{% block body %}
+Hello {{user.username}}
+<a href="{% url 'account:logout' %}">Logout</a>
+{% endblock %}
