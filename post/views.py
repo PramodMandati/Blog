@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
-from django.shortcuts import reverse
+from django.shortcuts import reverse, redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
@@ -22,10 +22,10 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 
 class PostListView(LoginRequiredMixin, ListView):
-    template_name = 'posts.html'
     context_object_name = 'objects'
     paginator_class = Paginator
     paginate_by = 2
+    template_name = 'posts.html'
 
     def get_queryset(self):
         return Post.objects.filter(user=self.request.user).all()
@@ -55,3 +55,18 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_object(self, queryset=None):
         return Post.objects.filter(user=self.request.user, id=self.kwargs['id']).first()
+
+
+class PublicPostListView(ListView):
+    context_object_name = 'objects'
+    paginator_class = Paginator
+    paginate_by = 2
+    template_name = 'public_posts.html'
+
+    def get(self, request, *args, **kwargs):
+        if request.user and request.user.is_authenticated:
+            return redirect(reverse('post:home_page'))
+        return super().get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return Post.objects.filter(is_draft=False).order_by('-published_at')

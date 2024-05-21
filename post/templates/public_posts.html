@@ -4,7 +4,7 @@
 {% block title %}Post Page{% endblock %}
 
 {% block navigation %}
-{% include 'nav.html' %}
+{% include 'public_nav.html' %}
 {% endblock %}
 
 {% block body %}
@@ -15,13 +15,10 @@
             <blockquote class="blockquote mb-0">
                 <p class="card-text">{{post.content}}</p>
                 <p class="font-weight-light" style="font-size:14px">
-                    Created at: {{post.created_at}}<br>
-                    Last Update at: {{post.updated_at}}<br>
+                    Author: {{post.user.username}}<br>
                     Published at: {% if not post.is_draft %}{{post.published_at}}{% endif %}
                 </p>
             </blockquote>
-            <a href="{% url 'post:post_update' id=post.id %}" class="btn btn-primary">Update</a>
-            <a href="{% url 'post:post_delete' id=post.id %}" class="btn btn-danger">Delete</a>
         </div>
     </div>
 {% endfor %}
@@ -48,7 +45,8 @@
 
 {% block custom_script %}
 <script>
-    document.getElementById('create_post_page_nav').setAttribute('class', 'nav-item');
-    document.getElementById('home_page_nav').setAttribute('class', 'nav-item active');
+    document.getElementById('public_home_page_nav').setAttribute('class', 'nav-item active');
+    document.getElementById('public_login_page_nav').setAttribute('class', 'nav-item');
+    document.getElementById('public_register_page_nav').setAttribute('class', 'nav-item');
 </script>
 {% endblock %}

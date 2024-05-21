@@ -35,6 +35,11 @@ class UserRegistrationView(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('account:login_page')
 
+    def get(self, request, *args, **kwargs):
+        if request.user and request.user.is_authenticated:
+            return redirect(reverse('post:home_page'))
+        return super().get(request, *args, **kwargs)
+
 
 class HomePageView(LoginRequiredMixin, TemplateView):
     login_url = reverse_lazy('account:login_page')
